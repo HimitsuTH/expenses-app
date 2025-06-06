@@ -1,4 +1,12 @@
 import express from "express";
+import session from "express-session"
+
+import redisHelper from 'libs/helpers/redis.helper'
+
+
+const RedisStore = require('connect-reids')(session)
+
+
 
 const app = express();
 const port = 3001;

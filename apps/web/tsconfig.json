@@ -8,7 +8,7 @@
     ]
   },
   "include": [
-    "**/*.ts",
+    "**/src/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
