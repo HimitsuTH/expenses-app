@@ -1,20 +1,23 @@
-import express from "express";
-import session from "express-session"
-
-import redisHelper from 'libs/helpers/redis.helper'
-
-
-const RedisStore = require('connect-reids')(session)
-
-
+import express from 'express';
 
 const app = express();
-const port = 3001;
 
-app.get("/", (_, res) => {
-  res.send("Hello from services!");
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+import redisHelper from 'libs/helpers/redis.helper'
+
+app.use(session({
+  store: new RedisStore({ client: redisHelper }),
+  secret: 'your secret',
+  resave: false,
+  saveUninitialized: false,
+}));
+
+
+app.get('/', (req, res) => {
+
 });
 
-app.listen(port, () => {
-  console.log(`Service running at http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
 });
