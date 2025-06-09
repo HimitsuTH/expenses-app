@@ -9,4 +9,8 @@ const redisHelper = new Redis({
     port: REDIS_PORT,
 })
 
+redisHelper.on('error', (err: any) => console.log('Redis connect failed.....'))
+redisHelper.on('ready', (err: any) => console.log('Redis connect success.....'))
+
+
 export default redisHelper
