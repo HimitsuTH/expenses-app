@@ -1,10 +1,16 @@
+import 'libs/helpers/dotenv.helper'
+
 import express from 'express';
+import bodyParser from 'body-parser';
 
 const app = express();
 
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
-import redisHelper from 'libs/helpers/redis.helper'
+import redisHelper from 'libs/helpers/redis.helper';
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
   store: new RedisStore({ client: redisHelper }),
@@ -15,9 +21,7 @@ app.use(session({
 
 
 app.get('/', (req, res) => {
-
+  console.log('Hello world')
 });
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
-});
+export default app
